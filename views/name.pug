@@ -1,0 +1,15 @@
+extends layout
+
+block content
+  h1= title
+  p Welcome to Lab10  #{title}
+
+  - var result = [{"name_style":"square","name_type":"wood","name_size":6},{"name_style":"reactangle","name_type":"iron","name_size":10},{"name_style":"oval","name_type":"glass","name_size":16}]
+  div.container-fluid
+     div.row
+        each item,index in result
+            div.col-sm-2(onclick=`buy(${index})`) name style: #{item["name_style"]}  <br>  name type: #{item["name_type"]} <br> name size: #{item["name_size"]} 
+  script.
+      function buy(index){
+         alert("you purchased item "+(index+1))
+      }
