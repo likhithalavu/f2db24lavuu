@@ -1,0 +1,43 @@
+extends layout
+ 
+block content
+  h1= title
+ 
+  - let nameid = toShow.id 
+  - let name_style = toShow.name_style 
+  - let name_type = toShow.name_type
+  - let name_size = toShow.name_size
+   
+  div.row(class='mb-2') 
+    div.mr-1 ID is 
+    div #{nameid} 
+  - let actionid = "/resource/names/" + nameid 
+  form(id='nameForm', action=actionid, method="PUT") 
+    div.form-group 
+        label.nameAttr(for='namestyle') name style
+        input#name(type='text', name='namestyle') 
+    div.form-group 
+        label.nameAttr(for='nametype') name type
+        input#type(type='text', name='nametype') 
+    div.form-group 
+        label.nameAttr(for='namesize') name size
+        input#size(type='number', name='namesize') 
+    input(type="submit")
+ 
+  script. 
+    document.forms['nameForm'].addEventListener('submit', (event) => { 
+      event.preventDefault(); 
+      // TODO do something here to show user that form is being submitted 
+      fetch(event.target.action, { 
+        method: 'PUT', 
+        body: new URLSearchParams(new FormData(event.target)) // event.target is the form 
+      }).then((resp) => { 
+        return resp.text(); // or resp.text() or whatever the server sends 
+      }).then((body) => { 
+        alert("Update succeded") 
+        // TODO handle body 
+      }).catch((error) => {
+        // TODO handle error 
+        alert("Update failed " + error )
+      }); 
+    });

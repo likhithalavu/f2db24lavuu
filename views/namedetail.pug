@@ -1,0 +1,22 @@
+extends layout 
+ 
+block content 
+  h1= title 
+ 
+  - let nameid = toShow._id 
+  - let name_style = toShow.name_style 
+  - let name_type = toShow.name_type
+  - let name_size = toShow.name_size 
+  div 
+    div.row 
+      div(class='nameAttr mr-3') Name ID is: 
+      div #{nameid} 
+    div.row 
+      div(class='nameAttr mr-3') Name Style is: 
+      div #{name_style} 
+    div.row 
+      div(class='nameAttr mr-3') Name Type is: 
+      div #{name_type} 
+    div.row 
+      div(class='nameAttr mr-3') Name Size is: 
+      div #{name_size}

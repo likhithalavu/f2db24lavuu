@@ -1,0 +1,55 @@
+extends layout 
+ 
+block content 
+  h1= title 
+ 
+  if (toShow == null) 
+    h2 No instance to delete 
+  else 
+    - let nameid = toShow._id 
+    - let name_style= toShow.name_style
+    - let name_type = toShow.name_type 
+    - let name_size = toShow.name_size 
+    - let actionid = "/resource/names/" + nameid 
+    script let actionid = "#{actionid}" 
+    div 
+      div.row 
+        div(class='nameAttr mr-3') name ID is: 
+        div #{nameid} 
+      div.row 
+        div(class='nameAttr mr-3') name style is: 
+        div #{name_style} 
+      div.row 
+        div(class='nameAttr mr-3') name type is: 
+        div #{name_type} 
+      div.row 
+        div(class='nameAttr mr-3') name size is: 
+        div #{name_size} 
+ 
+    button(class="btn btn-danger m-2" onclick="deleteOnid()") Delete 
+    button(class="btn btn-secondary m-2" onclick="cancel()") Cancel 
+ 
+  script. 
+    function cancel() { 
+      // Go back to the home page for the name collection 
+      window.location.href='/name/names'
+    } 
+  script. 
+    function deleteOnid() { 
+      console.log("starting delete") 
+      // delete first 
+      fetch(actionid, { 
+        method: 'DELETE'      //Dont need a body for the delete 
+      }).then((resp) => { 
+        return resp.json(); // or resp.text() or whatever the server sends 
+      }).then((body) => { 
+        alert("Delete succeded") 
+        window.location.href='/name/names' 
+        console.log(window.location.href)
+        // TODO handle body 
+      }).catch((error) => { 
+        // TODO handle error 
+        alert("Delete failed " + error ) 
+      }); 
+    } 
+    
