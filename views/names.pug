@@ -1,0 +1,20 @@
+extends layout
+
+block content
+  h1= title
+  p Welcome to Lab10  #{title}
+
+  div.container-fluid
+     div(class = "row m-1")
+        each item,index in results
+            - let destination = `dispatch(\"/name/update?id=${item._id}\")` 
+            div.col-sm-2(onclick=`buy(${index})`) name style: #{item["name_style"]}  <br>  name type: #{item["name_type"]} <br> name size: #{item["name_size"]}
+            button.btn( class="btn-primary ml-1", onclick= destination) Update  
+  script.
+      function buy(index){
+         alert("you purchased item "+(index+1))
+      }
+  script. 
+    function dispatch(path){ 
+      window.location.href=path 
+    }     

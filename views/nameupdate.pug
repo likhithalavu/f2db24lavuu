@@ -3,7 +3,7 @@ extends layout
 block content
   h1= title
  
-  - let nameid = toShow.id 
+  - let nameid = toShow._id 
   - let name_style = toShow.name_style 
   - let name_type = toShow.name_type
   - let name_size = toShow.name_size
@@ -15,13 +15,13 @@ block content
   form(id='nameForm', action=actionid, method="PUT") 
     div.form-group 
         label.nameAttr(for='namestyle') name style
-        input#name(type='text', name='namestyle') 
+        input#name(type='text', name='namestyle', value=name_style) 
     div.form-group 
         label.nameAttr(for='nametype') name type
-        input#type(type='text', name='nametype') 
+        input#type(type='text', name='nametype', value=name_type) 
     div.form-group 
         label.nameAttr(for='namesize') name size
-        input#size(type='number', name='namesize') 
+        input#size(type='number', name='namesize', value=name_size) 
     input(type="submit")
  
   script. 

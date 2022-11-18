@@ -3,9 +3,9 @@ var router = express.Router();
 const name_controller = require('../controllers/name');
 
 /* GET home page. */
- router.get('/', function(req, res, next) {
- res.render('name', { title: 'Search results here' });
- });
+//  router.get('/', function(req, res, next) {
+//  res.render('name', { title: 'Search results here' });
+//  });
 
 /* GET detail name page */ 
 router.get('/detail', name_controller.name_view_one_Page); 
@@ -23,6 +23,9 @@ router.get('/name/:id', name_controller.name_detail);
 router.get('/delete', name_controller.name_delete_Page); 
 
 router.get('/names', name_controller.name_list);
+
+/* GET Names */ 
+router.get('/', name_controller.name_view_all_Page );
  
 
 module.exports = router;

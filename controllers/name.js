@@ -26,7 +26,6 @@ exports.name_create_post = async function (req, res) {
   document.name_size = req.body.namesize;
   try {
     let result = await document.save();
-    console.log("LL" + result);
     res.send(result);
   } catch (err) {
     res.status(500);
@@ -53,18 +52,13 @@ exports.name_update_put = async function (req, res) {
 ${JSON.stringify(req.body)}`);
   try {
     let toUpdate = await name.findById(req.params.id)
-    console.log("Sai")
     // Do updates of properties
     if (req.body.namestyle) toUpdate.name_style = req.body.namestyle;
     if (req.body.nametype) toUpdate.name_type = req.body.nametype;
     if (req.body.namesize) toUpdate.name_size = req.body.namesize;
-    console.log("Likhitha2")
     let result = await toUpdate.save();
-    console.log("Likhitha1");
     console.log("Sucess " + result);
-    console.log("Likitha3")
     res.send(result);
-    console.log("Likhitha4")
   } catch (err) {
     res.status(500);
     res.send(`{"error": ${err}: Update for id ${req.params.id} 
@@ -89,15 +83,6 @@ exports.name_delete = async function (req, res) {
   }
 };
 
-exports.flim_view_all_Page = async function (req, res) {
-  try {
-    thenames = await name.find();
-    res.render("names", { title: "name Search Results", results: thenames });
-  } catch (err) {
-    res.status(500);
-    res.send(`{"error": ${err}}`);
-  }
-};
 
 // Handle a show one view with id specified by query
 exports.name_view_one_Page = async function (req, res) {
@@ -116,7 +101,7 @@ exports.name_view_one_Page = async function (req, res) {
 // Handle a show all view 
 exports.name_view_all_Page = async function(req, res) { 
   try{ 
-      thename = await name.find(); 
+      thenames = await name.find(); 
       res.render('names', { title: ' name Search Results', results: thenames }); 
   } 
   catch(err){ 
@@ -129,7 +114,6 @@ exports.name_view_all_Page = async function(req, res) {
 // No body, no in path parameter, no query.
 // Does not need to be async
 exports.name_create_Page = function (req, res) {
-  console.log("create view");
   try {
     res.render("namecreate", { title: "name Create" });
   } catch (err) {
@@ -141,7 +125,6 @@ exports.name_create_Page = function (req, res) {
 // Handle building the view for updating a name. 
 // query provides the id 
 exports.name_update_Page =  async function(req, res) { 
-  console.log("Likhitha")
   console.log("update view for item "+req.query.id) 
   try{
       let result = await name.findById(req.query.id) 
