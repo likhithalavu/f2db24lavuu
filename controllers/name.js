@@ -66,9 +66,9 @@ failed`);
   }
 };
 // Handle name delete form on DELETE.
-exports.name_delete = function (req, res) {
-res.send('NOT IMPLEMENTED: name delete DELETE ' + req.params.id);
-};
+// exports.name_delete = function (req, res) {
+// res.send('NOT IMPLEMENTED: name delete DELETE ' + req.params.id);
+// };
 
 // Handle name delete on DELETE.
 exports.name_delete = async function (req, res) {

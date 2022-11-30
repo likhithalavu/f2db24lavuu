@@ -2,19 +2,35 @@ extends layout
 
 block content
   h1= title
-  p Welcome to Lab10  #{title}
+  p Welcome to #{title} 
 
-  div.container-fluid
-     div(class = "row m-1")
-        each item,index in results
-            - let destination = `dispatch(\"/name/update?id=${item._id}\")` 
-            div.col-sm-2(onclick=`buy(${index})`) name style: #{item["name_style"]}  <br>  name type: #{item["name_type"]} <br> name size: #{item["name_size"]}
-            button.btn( class="btn-primary ml-1", onclick= destination) Update  
+  div(class="container-fluid")
+    div(class="row m-1")
+      -let tocreate = `dispatch(\"/name/create")`
+        button.btn( class="btn-success ml-1", onclick= tocreate) Create a New name  
+
+  div(class="container-fluid")
+    div(class="row m-1")
+        each item,index in results 
+         - let destination = `dispatch(\"/name/update?id=${item._id}\")`     
+             div.col-sm-2(onclick=`buy(${index})`) name_Name: #{item["name_Name"]}  <br>  name_Type: #{item["name_Type"]} <br> name_Cost: #{item["name_Cost"]}
+             button.btn( class="btn-warning ml-1", onclick= destination) Update 
+             div(class="row m-1")
+             - let toView = `dispatch(\"/name/detail?id=${item._id}\")`
+             button.btn( class="btn-danger ml-1", onclick= toView) Detail View
+             div(class="row m-1")
+             - let toDelete = `dispatch(\"/name/delete?id=${item._id}\")`
+                button.btn( class="btn-info ml-1", onclick= toDelete) Delete View  
+
+       
+
+   
   script.
-      function buy(index){
-         alert("you purchased item "+(index+1))
-      }
+    function buy(index){
+      alert("you purchased item "+(index+1))
+    }
+
   script. 
     function dispatch(path){ 
       window.location.href=path 
-    }     
+    }
